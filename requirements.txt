@@ -1,0 +1,18 @@
+# Intel Macs: torch 2.2.2 is the last release with x86_64 macOS builds
+torch==2.2.2
+torchaudio==2.2.2
+numpy<2
+demucs==4.0.1
+soundfile
+
+# speech -> text (runs locally on the CPU, no API key)
+faster-whisper>=1.0.3
+ctranslate2<4.5          # last series with x86_64 macOS wheels
+onnxruntime              # used by faster-whisper's voice-activity filter
+
+# english -> spanish (offline neural translation, no API key)
+argostranslate>=1.9.6
+
+# spanish text -> speech (free Microsoft Edge neural voices, no API key)
+edge-tts>=6.1.9
+pillow

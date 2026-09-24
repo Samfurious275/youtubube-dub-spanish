@@ -1,0 +1,11 @@
+# Python virtual environment (1.2 GB -- recreated by run.sh / run.bat)
+.venv/
+__pycache__/
+*.pyc
+
+# Per-video cache and finished dubs
+work/
+output/
+
+# macOS
+.DS_Store
