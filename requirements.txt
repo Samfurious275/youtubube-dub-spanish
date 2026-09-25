@@ -16,3 +16,6 @@ argostranslate>=1.9.6
 # spanish text -> speech (free Microsoft Edge neural voices, no API key)
 edge-tts>=6.1.9
 pillow
+
+# web page (serve.sh / serve.bat)
+gradio>=6.0

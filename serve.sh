@@ -1,9 +1,9 @@
 #!/bin/bash
-# Command-line version. First run installs everything; after that it just runs
-# dub.py with your arguments.
+# Opens the dubber in your browser. First run installs everything it needs.
 set -e
 cd "$(dirname "$0")"
 
+# --- ffmpeg and yt-dlp ------------------------------------------------------
 for tool in ffmpeg yt-dlp; do
   command -v "$tool" >/dev/null && continue
   if command -v brew >/dev/null; then
@@ -16,6 +16,9 @@ for tool in ffmpeg yt-dlp; do
   fi
 done
 
+# --- python 3.11 ------------------------------------------------------------
+# torch 2.2.2 is the newest build for Intel Macs and has no wheels past 3.11,
+# so the venv has to be built with that interpreter specifically.
 find_python() {
   for c in python3.11 /usr/local/opt/python@3.11/bin/python3.11 \
            /opt/homebrew/opt/python@3.11/bin/python3.11 \
@@ -33,12 +36,15 @@ if [ ! -x .venv/bin/python ]; then
     else
       echo "Python 3.11 is required but was not found."
       echo "  Debian/Ubuntu:  sudo apt install python3.11 python3.11-venv"
+      echo "  or add the deadsnakes PPA if your release does not carry it:"
+      echo "    sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt update"
       exit 1
     fi
   }
+  echo "Building the environment with $PY. This takes a while the first time..."
   "$PY" -m venv .venv
   .venv/bin/pip install --upgrade pip
   .venv/bin/pip install -r requirements.txt
 fi
 
-exec .venv/bin/python dub.py "$@"
+exec .venv/bin/python serve.py "$@"
