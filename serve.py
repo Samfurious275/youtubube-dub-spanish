@@ -11,7 +11,7 @@ Either one installs whatever is missing on first run, starts the page and opens
 your browser at it. Nothing is uploaded anywhere: the whole pipeline runs on this
 machine.
 
-  ./serve.sh --share                       also publish a public link (72 hours)
+  ./serve.sh --share                       also publish a public link (up to a week)
   ./serve.sh --share --password hunter2    ... with a password on it
 """
 
@@ -140,7 +140,7 @@ def main():
         description="Serve the dubber as a web page on this machine.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     p.add_argument("--share", action="store_true",
-                   help="also publish a public gradio.live link (expires in 72 h)")
+                   help="also publish a public gradio.live link (lasts up to a week)")
     p.add_argument("--password", default=None,
                    help="require this password; strongly advised with --share")
     p.add_argument("--user", default="dub", help="username that goes with --password")

@@ -165,23 +165,82 @@ Press `Ctrl+C` in the terminal, or just close the window.
 
 ## Sharing the page with someone else
 
+You can give someone a link that opens this page in their browser, from anywhere,
+without them installing anything. Your computer still does all the work.
+
+### 1. Start it with sharing on
+
 ```bash
-./serve.sh --share --password something-hard
+./serve.sh --share --password choose-something-hard          # macOS / Linux
 ```
 
 ```bat
-serve.bat --share --password something-hard
+serve.bat --share --password choose-something-hard
 ```
 
-This prints a public `https://...gradio.live` link that works from anywhere for
-72 hours. Your machine does the work, so it must stay awake.
+Pick your own username too, if you like:
 
-The link asks for a login. **The username is `dub`** unless you change it with
-`--user`; the password is whatever you passed. Both are printed in the terminal
-when the server starts, so check there if the page says *Incorrect Credentials*.
+```bash
+./serve.sh --share --user samy --password choose-something-hard
+```
 
-Always set a password. Without one, anyone with the link can queue jobs on your
-computer.
+### 2. Read the terminal
+
+It prints everything you need to pass on:
+
+```
+  Running on public URL: https://731af56735d79d8274.gradio.live
+
+  The page will ask you to log in:
+      username   dub
+      password   choose-something-hard
+```
+
+The **public URL** changes every time you start it. The **username is `dub`**
+unless you set `--user`.
+
+### 3. Send all three
+
+The link on its own is not enough — the page opens straight onto a login box.
+Send the URL, the username and the password together, or they will get
+*Incorrect Credentials* and not know why.
+
+Something like:
+
+> Here's the Spanish dubber: https://731af56735d79d8274.gradio.live
+> Username: `dub`
+> Password: `choose-something-hard`
+>
+> Pick a video, press "Dub it", and give it about five minutes per minute of
+> video — it looks frozen while it works. Please keep the link to yourself.
+
+### What they should expect
+
+- **It is slow.** Roughly five minutes of processing per minute of video.
+- **One job at a time.** If two people submit at once, the second waits.
+- **It only works while your machine is awake** and the terminal is open.
+
+### Stopping the share
+
+| What you want | What to do |
+| --- | --- |
+| Stop everything now | `Ctrl+C` in the terminal, or close the window |
+| Stop a run you started in the background | `pkill -f serve.py` (macOS/Linux) |
+| Keep using it yourself, but privately | Stop it, then start again without `--share` |
+
+The link dies the moment the server stops. Gradio also expires it on its own side
+after **up to a week**, which it describes as best effort — so do not count on it
+lasting that long. A fresh link is generated every time you start with `--share`,
+and old ones never come back, so there is nothing to revoke.
+
+### Before you share
+
+- **Always set a password.** Without `--password` the page is open to anyone who
+  has, guesses or is forwarded the link, and every job runs on your machine.
+- Anyone logged in can upload any video and use your processor for as long as it
+  takes. Only share with people you would lend the laptop to.
+- Change the password each time you share with a different person; the old link
+  and password stop working as soon as you restart.
 
 ---
 
