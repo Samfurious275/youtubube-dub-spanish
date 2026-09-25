@@ -155,6 +155,12 @@ def main():
               "    Add --password to lock it.\n")
 
     print(f"\n  Starting the dubber on http://{a.host}:{a.port}")
+    if a.password:
+        # The username is easy to miss, and the login just says "Incorrect
+        # Credentials" when it is wrong, so spell both out here.
+        print(f"\n  The page will ask you to log in:")
+        print(f"      username   {a.user}")
+        print(f"      password   {a.password}\n")
     print("  Your browser should open by itself. Press Ctrl+C here to stop.\n")
 
     # queue() keeps long jobs alive; without it the browser gives up partway

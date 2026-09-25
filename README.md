@@ -176,6 +176,10 @@ serve.bat --share --password something-hard
 This prints a public `https://...gradio.live` link that works from anywhere for
 72 hours. Your machine does the work, so it must stay awake.
 
+The link asks for a login. **The username is `dub`** unless you change it with
+`--user`; the password is whatever you passed. Both are printed in the terminal
+when the server starts, so check there if the page says *Incorrect Credentials*.
+
 Always set a password. Without one, anyone with the link can queue jobs on your
 computer.
 
